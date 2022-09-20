@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { IconButton } from '../components';
-import Firebase from '../config/firebase';
+import Firebase from '../../config/firebase';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 const auth = Firebase.auth;

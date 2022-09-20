@@ -1,7 +1,11 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import Constants from 'expo-constants';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, initializeAuth } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getReactNativePersistence } from 'firebase/auth/react-native';
+import { initializeFirestore } from 'firebase/firestore'
+
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -14,12 +18,14 @@ const firebaseConfig = {
     measurementId: Constants.manifest.extra.measurementId
 };
 
-var app = firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
-var auth = getAuth(app);
+const auth = initializeAuth(app, {persistence: getReactNativePersistence(AsyncStorage)});
+const firestore = initializeFirestore(app, {persistence: getReactNativePersistence(AsyncStorage)});
 
 var Firebase = {
     auth: auth,
+    firestore: firestore,
     signInWithEmailAndPassword: signInWithEmailAndPassword,
     createUserWithEmailAndPassword: createUserWithEmailAndPassword
     

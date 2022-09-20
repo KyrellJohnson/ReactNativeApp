@@ -4,16 +4,16 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Button as RNButton } from 'react-native';
 
 import { Button, InputField, ErrorMessage } from '../components';
-import Firebase from '../config/firebase';
+import Firebase from '../../config/firebase';
 
 const auth = Firebase.auth;
 
-export default function SignupScreen({ navigation }) {
+export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [rightIcon, setRightIcon] = useState('eye');
-  const [signupError, setSignupError] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   const handlePasswordVisibility = () => {
     if (rightIcon === 'eye') {
@@ -25,20 +25,21 @@ export default function SignupScreen({ navigation }) {
     }
   };
 
-  const onHandleSignup = async () => {
+  const onLogin = async () => {
+
     try {
       if (email !== '' && password !== '') {
-        await Firebase.createUserWithEmailAndPassword(auth,email, password);
+        await Firebase.signInWithEmailAndPassword(auth, email, password);
       }
     } catch (error) {
-      setSignupError(error.message);
+      setLoginError(error.message);
     }
   };
 
   return (
     <View style={styles.container}>
       <StatusBar style='dark-content' />
-      <Text style={styles.title}>Create new account</Text>
+      <Text style={styles.title}>Login</Text>
       <InputField
         inputStyle={{
           fontSize: 14
@@ -75,11 +76,11 @@ export default function SignupScreen({ navigation }) {
         onChangeText={text => setPassword(text)}
         handlePasswordVisibility={handlePasswordVisibility}
       />
-      {signupError ? <ErrorMessage error={signupError} visible={true} /> : null}
+      {loginError ? <ErrorMessage error={loginError} visible={true} /> : null}
       <Button
-        onPress={onHandleSignup}
+        onPress={onLogin}
         backgroundColor='#f57c00'
-        title='Signup'
+        title='Login'
         tileColor='#fff'
         titleSize={20}
         containerStyle={{
@@ -87,8 +88,8 @@ export default function SignupScreen({ navigation }) {
         }}
       />
       <RNButton
-        onPress={() => navigation.navigate('Login')}
-        title='Go to Login'
+        onPress={() => navigation.navigate('Signup')}
+        title='Go to Signup'
         color='#fff'
       />
     </View>
