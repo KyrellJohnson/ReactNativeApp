@@ -9,7 +9,7 @@ const Tab = createBottomTabNavigator();
 
 export default function HomeStack() {
   return (
-      <Tab.Navigator headerMode='none'>
+      <Tab.Navigator headerMode='none' screenOptions={{headerShown: false}}>
         <Tab.Screen name='Home' component={HomeScreen} />
         <Tab.Screen name='Explore' component={ExploreScreen} />
         <Tab.Screen name='Communities' component={HomeScreen} />

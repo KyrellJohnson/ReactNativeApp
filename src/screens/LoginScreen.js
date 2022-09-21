@@ -79,7 +79,7 @@ export default function LoginScreen({ navigation }) {
       {loginError ? <ErrorMessage error={loginError} visible={true} /> : null}
       <Button
         onPress={onLogin}
-        backgroundColor='#f57c00'
+        backgroundColor='#e5383b'
         title='Login'
         tileColor='#fff'
         titleSize={20}
@@ -87,10 +87,10 @@ export default function LoginScreen({ navigation }) {
           marginBottom: 24
         }}
       />
-      <RNButton
+      <Button
         onPress={() => navigation.navigate('Signup')}
         title='Go to Signup'
-        color='#fff'
+        color='#000'
       />
     </View>
   );
@@ -99,7 +99,7 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e93b81',
+    backgroundColor: '#494949',
     paddingTop: 50,
     paddingHorizontal: 12
   },
@@ -109,5 +109,5 @@ const styles = StyleSheet.create({
     color: '#fff',
     alignSelf: 'center',
     paddingBottom: 24
-  }
+  },
 });
