@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { ScrollView } from "react-native";
-import { Box, Heading, Badge, HStack, Pressable } from "native-base";
+import { Box, Heading, Badge, HStack, Pressable,ThreeDotsIcon } from "native-base";
 import { TrendingCard } from "../components";
 
 export default function ExploreScreen({ navigation }) {
@@ -34,7 +34,7 @@ export default function ExploreScreen({ navigation }) {
     ]
 
     const topicLinkList = topicLinks.map(function (topic, index) {
-        return <Pressable onPress={topic.link}><Badge colorScheme="indigo" borderRadius={"lg"} padding="2" key={index}>{topic.title}</Badge></Pressable>;
+        return <Pressable onPress={topic.link} key={index}><Badge colorScheme="indigo" borderRadius={"lg"} padding="2">{topic.title}</Badge></Pressable>;
     })
 
 
@@ -59,9 +59,21 @@ export default function ExploreScreen({ navigation }) {
                     Horizntal Scroll View of Trending Posts
                 */}
                 <ScrollView horizontal={true}>
-                    <TrendingCard title="Hello New Title" subtitle="this is a subtitle" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non vehicula sapien. Donec tincidunt sem in nibh sollicitudin varius. Cras volutpat urna at sapien egestas, sit amet viverra dui hendrerit." timestamp="10 minutes ago" />
-                    <TrendingCard title="My New Title 2" subtitle="this is a subtitle" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non vehicula sapien. Donec tincidunt sem in nibh sollicitudin varius. Cras volutpat urna at sapien egestas, sit amet viverra dui hendrerit." timestamp="45 minutes ago" />
-                    <TrendingCard title="Third Card" subtitle="this is a subtitle" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non vehicula sapien. Donec tincidunt sem in nibh sollicitudin varius. Cras volutpat urna at sapien egestas, sit amet viverra dui hendrerit." timestamp="2 hours ago" />
+                    <TrendingCard title="Hello New Title"
+                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non vehicula sapien. Donec tincidunt sem in nibh sollicitudin varius. Cras volutpat urna at sapien egestas, sit amet viverra dui hendrerit."
+                        timestamp="10 minutes ago"
+                        padding_right={2}  />
+                    <TrendingCard title="My New Title 2"
+                        subtitle="this is a subtitle"
+                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non vehicula sapien. Donec tincidunt sem in nibh sollicitudin varius. Cras volutpat urna at sapien egestas, sit amet viverra dui hendrerit."
+                        timestamp="45 minutes ago" 
+                        padding_right={2}/>
+                    <TrendingCard title="Third Card"
+                        subtitle="this is a subtitle"
+                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non vehicula sapien. Donec tincidunt sem in nibh sollicitudin varius. Cras volutpat urna at sapien egestas, sit amet viverra dui hendrerit."
+                        timestamp="2 hours ago"
+                        padding_right={2} 
+                        />
                 </ScrollView>
             </Box>
         </View>
@@ -72,7 +84,7 @@ const styles = StyleSheet.create({
     exploreTitle: {
         fontSize: 30,
         paddingLeft: "5%",
-        paddingTop: "20%",
+        paddingTop: "5%",
         paddingBottom: "5%"
     }
 });

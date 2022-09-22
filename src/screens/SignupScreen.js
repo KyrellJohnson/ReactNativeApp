@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Button as RNButton } from 'react-native';
 
 import { Button, InputField, ErrorMessage } from '../components';
 import Firebase from '../../config/firebase';
+import CreateUser from '../services/CreateUser.service';
 
 const auth = Firebase.auth;
 
@@ -27,11 +28,13 @@ export default function SignupScreen({ navigation }) {
 
   const onHandleSignup = async () => {
     try {
-      if (email !== '' && password !== '') {
-        await Firebase.createUserWithEmailAndPassword(auth,email, password);
+      var error = await CreateUser({email: email, password: password})
+      console.log("@" + error)
+      if(error){
+        setSignupError(error.message);
       }
-    } catch (error) {
-      setSignupError(error.message);
+    } catch (e) {
+      setSignupError(e.message);
     }
   };
 

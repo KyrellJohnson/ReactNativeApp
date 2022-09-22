@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
 import { IconButton } from '../components';
 import Firebase from '../../config/firebase';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
@@ -18,6 +17,7 @@ export default function HomeScreen() {
     }
   };
   return (
+    
     <View style={styles.container}>
       <StatusBar style='dark-content' />
       <View style={styles.row}>
@@ -30,6 +30,7 @@ export default function HomeScreen() {
         />
       </View>
       <Text style={styles.text}>Your UID is: {user.uid} </Text>
+      <Text style={styles.text}>Your displayName is: {user.displayName} </Text>
     </View>
   );
 }

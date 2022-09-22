@@ -7,18 +7,21 @@ import {
     HStack,
     Stack,
     Heading,
-    Text
+    Text,
+    VStack,
+    Avatar
 } from "native-base";
 
 const TrendingCard = (props) => {
+    
     return (
-        <Box alignItems="center" paddingLeft={0} paddingRight={3}>
+        <Box alignItems="center" paddingLeft={0} paddingRight={props.padding_right}>
             <Box
-                maxW="80"
                 rounded="lg"
                 overflow="hidden"
                 borderColor="coolGray.200"
                 borderWidth="1"
+                maxW={ props.width ? props.width : 80}
                 _dark={{
                     borderColor: "coolGray.600",
                     backgroundColor: "gray.700",
@@ -32,25 +35,38 @@ const TrendingCard = (props) => {
                 }}
             >
                 <Stack p="4" space={3}>
-                    <Stack space={2}>
-                        <Heading size="md" ml="-1">
-                            {props.title}
-                        </Heading>
-                        <Text
-                            fontSize="xs"
-                            _light={{
-                                color: "violet.500",
-                            }}
-                            _dark={{
-                                color: "violet.400",
-                            }}
-                            fontWeight="500"
-                            ml="-0.5"
-                            mt="-1"
-                        >
-                            {props.subtitle}
-                        </Text>
-                    </Stack>
+                    {!props.avatar ?
+                        <Stack space={2}>
+                            <Heading size="md" ml="-1">
+                                {props.title}
+                            </Heading>
+                            {props.subtitle &&
+                                <Text
+                                    fontSize="xs"
+                                    _light={{
+                                        color: "violet.500",
+                                    }}
+                                    _dark={{
+                                        color: "violet.400",
+                                    }}
+                                    fontWeight="500"
+                                    ml="-0.5"
+                                    mt="-1"
+                                >
+                                    {props.subtitle}
+                                </Text>
+                            }
+                        </Stack>
+                        :
+                        <HStack space={2} alignItems={'center'}>
+                            <Avatar bg="green.500" size={'sm'} source={{
+                                uri: props.avatar
+                            }}></Avatar>
+                            <Text fontSize="md">
+                                @admin
+                            </Text>
+                        </HStack>
+                    }
                     <Text fontWeight="400">
                         {props.content}
                     </Text>
@@ -70,6 +86,9 @@ const TrendingCard = (props) => {
                                 {props.timestamp}
                             </Text>
                         </HStack>
+                        <Box>
+                            {props.icon}
+                        </Box>
                     </HStack>
                 </Stack>
             </Box>
