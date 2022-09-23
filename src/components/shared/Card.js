@@ -5,11 +5,12 @@ import {
     Stack,
     Heading,
     Text,
-    Avatar
+    Avatar,
+    Pressable,
 } from "native-base";
 
 const Card = (props) => {
-    
+
     return (
         <Box alignItems="center" paddingLeft={0} paddingRight={props.padding_right}>
             <Box
@@ -17,7 +18,7 @@ const Card = (props) => {
                 overflow="hidden"
                 borderColor="coolGray.200"
                 borderWidth="1"
-                w={ props.type =="post" ? "100%" : 80}
+                w={props.type == "post" ? "100%" : 80}
                 _dark={{
                     borderColor: "coolGray.600",
                     backgroundColor: "gray.700",
@@ -31,7 +32,7 @@ const Card = (props) => {
                 }}
             >
                 <Stack p="4" space={3}>
-                    {!props.avatar ?
+                    {props.type != "post" ?
                         <Stack space={2}>
                             <Heading size="md" ml="-1">
                                 {props.title}
@@ -54,13 +55,19 @@ const Card = (props) => {
                             }
                         </Stack>
                         :
-                        <HStack space={2} alignItems={'center'}>
-                            <Avatar bg="green.500" size={'sm'} source={{
-                                uri: props.avatar
-                            }}></Avatar>
-                            <Text fontSize="md">
-                                @admin
-                            </Text>
+                        <HStack space={2} justifyContent="space-between" alignItems="center">
+                            <HStack alignItems={'center'}>
+                                <Avatar bg="green.500" size={'sm'} source={{
+                                    uri: props.avatar
+                                }}></Avatar>
+                                <Text fontSize="md">
+                                    @admin
+                                </Text>
+                            </HStack>
+
+                            <Box>
+                                {props.iconThreeDots}
+                            </Box>
                         </HStack>
                     }
                     <Text fontWeight="400">
@@ -82,9 +89,26 @@ const Card = (props) => {
                                 {props.timestamp}
                             </Text>
                         </HStack>
-                        <Box>
-                            {props.icon}
-                        </Box>
+                        <HStack alignItems="center" space={4}>
+
+                            <HStack space={1}>
+                                <Text>{props.favCount}</Text>
+                                <Box>
+                                    {props.iconFav}
+                                </Box>
+                            </HStack>
+
+                            <HStack space={1}>
+                                <Text>{props.commentCount}</Text>
+                                <Pressable onPress={props.onClick}>
+                                    <Box>
+                                        {props.iconComment}
+                                    </Box>
+                                </Pressable>
+
+                            </HStack>
+                        </HStack>
+
                     </HStack>
                 </Stack>
             </Box>

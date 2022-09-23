@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, RefreshControl } from 'react-native'
+import { RefreshControl } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {
     Box,
@@ -17,7 +17,7 @@ const wait = async (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
 }
 
-export default function HomeMain() {
+export default function HomeMainFeed({ navigation }) {
 
     const [refreshing, setRefreshing] = React.useState(false);
     const [posts, setPosts] = React.useState([]);
@@ -31,26 +31,46 @@ export default function HomeMain() {
 
     useEffect(() => {
         GetMainFeed();
-    }, [])
+    }, []);
 
     async function GetMainFeed() {
         const feed = await GetUserMainFeed();
         setPosts(feed);
     }
 
+    function ViewPost(currentPost) {
+
+        console.log(currentPost)
+
+        navigation.navigate('Post', {
+            post: currentPost
+        })
+    }
+
     const postLinks = posts.map(function (post, index) {
         return <Card
-            title={post.title}
+            onClick={() => ViewPost(post)}
             content={post.content}
             avatar={"https://avatars.githubusercontent.com/u/6368050?s=40&v=4"}
             timestamp={post.timestamp}
-            icon={ <MaterialCommunityIcons name="dots-horizontal" color="black" size={24}/> }
+            iconThreeDots={
+                <MaterialCommunityIcons name="dots-horizontal" color="black" size={24} />
+            }
+            iconComment={
+                <MaterialCommunityIcons name="chat-outline" color="black" size={24} />
+            }
+            iconFav={
+                <MaterialCommunityIcons name="cards-heart-outline" color="black" size={24} />
+            }
+            favCount={post.favCount}
+            commentCount={post.commentCount}
             type={'post'}
             key={index}
         />
     })
 
     return (
+
         <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} stickyHeaderIndices={[0]}>
             <HStack space={'md'} justifyContent={'center'} alignItems={'center'} paddingTop={5}>
 

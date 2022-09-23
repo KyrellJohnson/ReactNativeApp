@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { ScrollView } from "react-native";
-import { Box, Heading, Badge, HStack, Pressable,ThreeDotsIcon } from "native-base";
+import { Box, Heading, Badge, HStack, Pressable, ThreeDotsIcon } from "native-base";
 import { Card } from "../components";
 
 export default function ExploreScreen({ navigation }) {
@@ -12,23 +12,23 @@ export default function ExploreScreen({ navigation }) {
             link: () => navigation.navigate('Home') //render a different view
         },
         {
-            title: "ESports",
+            title: "Trend1",
             link: () => { }
         },
         {
-            title: "Tournaments",
+            title: "Trend2",
             link: () => { }
         },
         {
-            title: "Events",
+            title: "Trend3",
             link: () => { }
         },
         {
-            title: "Upcoming Releases",
+            title: "Trend4",
             link: () => { }
         },
         {
-            title: "Streaming",
+            title: "Trend5",
             link: () => { }
         },
     ]
@@ -62,18 +62,18 @@ export default function ExploreScreen({ navigation }) {
                     <Card title="Hello New Title"
                         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non vehicula sapien. Donec tincidunt sem in nibh sollicitudin varius. Cras volutpat urna at sapien egestas, sit amet viverra dui hendrerit."
                         timestamp="10 minutes ago"
-                        padding_right={2}  />
+                        padding_right={2} />
                     <Card title="My New Title 2"
                         subtitle="this is a subtitle"
                         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non vehicula sapien. Donec tincidunt sem in nibh sollicitudin varius. Cras volutpat urna at sapien egestas, sit amet viverra dui hendrerit."
-                        timestamp="45 minutes ago" 
-                        padding_right={2}/>
+                        timestamp="45 minutes ago"
+                        padding_right={2} />
                     <Card title="Third Card"
                         subtitle="this is a subtitle"
                         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non vehicula sapien. Donec tincidunt sem in nibh sollicitudin varius. Cras volutpat urna at sapien egestas, sit amet viverra dui hendrerit."
                         timestamp="2 hours ago"
-                        padding_right={2} 
-                        />
+                        padding_right={2}
+                    />
                 </ScrollView>
             </Box>
         </View>
