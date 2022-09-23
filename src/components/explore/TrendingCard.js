@@ -1,14 +1,10 @@
 
 import {
     Box,
-    AspectRatio,
-    Image,
-    Center,
     HStack,
     Stack,
     Heading,
     Text,
-    VStack,
     Avatar
 } from "native-base";
 
@@ -21,7 +17,7 @@ const TrendingCard = (props) => {
                 overflow="hidden"
                 borderColor="coolGray.200"
                 borderWidth="1"
-                maxW={ props.width ? props.width : 80}
+                w={ props.type =="post" ? "100%" : 80}
                 _dark={{
                     borderColor: "coolGray.600",
                     backgroundColor: "gray.700",

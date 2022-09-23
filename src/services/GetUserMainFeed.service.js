@@ -23,6 +23,7 @@ const GetUserMainFeed = async function () {
         });
         //DEBUG: console.log("DOC" + doc.data);
     });
+    
 
     /* // get the last visible document in snapshot
     const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];

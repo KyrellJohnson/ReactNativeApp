@@ -1,19 +1,12 @@
 import React, { useEffect } from 'react'
 import { View, RefreshControl } from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {
-    Input,
-    Stack,
     Box,
     HStack,
-    Avatar,
     Button,
-    Container,
-    Heading,
-    Text,
     VStack,
-    ThreeDotsIcon,
     ScrollView,
-
 } from 'native-base'
 import { StyleSheet } from 'react-native'
 import { TrendingCard } from '../../components'
@@ -31,13 +24,14 @@ export default function HomeMain() {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
+        wait(100)
         GetMainFeed();
-        wait(1000).then(() => setRefreshing(false));
+        wait(800).then(() => setRefreshing(false));
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         GetMainFeed();
-    })
+    }, [])
 
     async function GetMainFeed() {
         const feed = await GetUserMainFeed();
@@ -48,22 +42,23 @@ export default function HomeMain() {
         return <TrendingCard
             title={post.title}
             content={post.content}
-            avatar={""}
+            avatar={"https://avatars.githubusercontent.com/u/6368050?s=40&v=4"}
             timestamp={post.timestamp}
-            icon={<ThreeDotsIcon />}
-            width="100%"
+            icon={ <MaterialCommunityIcons name="dots-horizontal" color="black" size={24}/> }
+            type={'post'}
             key={index}
         />
     })
 
     return (
-        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} stickyHeaderIndices={[0]}>
             <HStack space={'md'} justifyContent={'center'} alignItems={'center'} paddingTop={5}>
 
                 <Box space={4} w="75%" maxW="300px">
                     <Button size={'sm'}>Create New Post</Button>
                 </Box>
             </HStack>
+            {/* List users posts & subscribed to posts */}
             <VStack space={3} style={styles.postsContainer}>
                 {postLinks}
             </VStack>
