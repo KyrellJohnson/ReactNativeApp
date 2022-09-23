@@ -8,7 +8,7 @@ import {
     Avatar
 } from "native-base";
 
-const TrendingCard = (props) => {
+const Card = (props) => {
     
     return (
         <Box alignItems="center" paddingLeft={0} paddingRight={props.padding_right}>
@@ -92,4 +92,4 @@ const TrendingCard = (props) => {
     );
 }
 
-export default TrendingCard;
+export default Card;

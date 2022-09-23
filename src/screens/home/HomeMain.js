@@ -9,7 +9,7 @@ import {
     ScrollView,
 } from 'native-base'
 import { StyleSheet } from 'react-native'
-import { TrendingCard } from '../../components'
+import { Card } from '../../components'
 import GetUserMainFeed from '../../services/GetUserMainFeed.service'
 
 const wait = async (timeout) => {
@@ -39,7 +39,7 @@ export default function HomeMain() {
     }
 
     const postLinks = posts.map(function (post, index) {
-        return <TrendingCard
+        return <Card
             title={post.title}
             content={post.content}
             avatar={"https://avatars.githubusercontent.com/u/6368050?s=40&v=4"}
