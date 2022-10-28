@@ -4,9 +4,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {
     Box,
     HStack,
-    Button,
+    Icon,
     VStack,
     ScrollView,
+    Fab,
+    View
 } from 'native-base'
 import { StyleSheet } from 'react-native'
 import { Card } from '../../components'
@@ -26,7 +28,7 @@ export default function HomeMainFeed({ navigation }) {
         setRefreshing(true);
         wait(100)
         GetMainFeed();
-        wait(800).then(() => setRefreshing(false));
+        console.log("!");
     }, []);
 
     useEffect(() => {
@@ -34,8 +36,11 @@ export default function HomeMainFeed({ navigation }) {
     }, []);
 
     async function GetMainFeed() {
-        const feed = await GetUserMainFeed();
-        setPosts(feed);
+        const feed = await GetUserMainFeed()
+            .then((newFeed)=>setPosts(newFeed))
+            .catch((err)=>console.log("error feed" + err))
+            .finally(()=>setRefreshing(false));
+        
     }
 
     function ViewPost(currentPost) {
@@ -50,7 +55,7 @@ export default function HomeMainFeed({ navigation }) {
     const postLinks = posts.map(function (post, index) {
         return <Card
             onClick={() => ViewPost(post)}
-            content={post.content}
+            content={(post.content).substring(0,150)}
             avatar={"https://avatars.githubusercontent.com/u/6368050?s=40&v=4"}
             timestamp={post.timestamp}
             iconThreeDots={
@@ -70,20 +75,28 @@ export default function HomeMainFeed({ navigation }) {
     })
 
     return (
+        <>
+            <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} stickyHeaderIndices={[0]}>
+                <HStack space={'md'} justifyContent={'center'} alignItems={'center'} paddingTop={5}>
 
-        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} stickyHeaderIndices={[0]}>
-            <HStack space={'md'} justifyContent={'center'} alignItems={'center'} paddingTop={5}>
+                    <Box space={4} w="75%" maxW="300px">
 
-                <Box space={4} w="75%" maxW="300px">
-                    <Button size={'sm'}>Create New Post</Button>
-                </Box>
-            </HStack>
-            {/* List users posts & subscribed to posts */}
-            <VStack space={3} style={styles.postsContainer}>
-                {postLinks}
-            </VStack>
-        </ScrollView>
+                    </Box>
+                </HStack>
+                {/* List users posts & subscribed to posts */}
+                <VStack space={3} style={styles.postsContainer}>
+                    {postLinks}
+                </VStack>
 
+            </ScrollView>
+            <Fab renderInPortal={false}
+                shadow={2}
+                size="sm"
+                icon={<Icon color="white" as={MaterialCommunityIcons} name="pencil-plus" size="md" />}
+                marginRight={2}
+                marginBottom={2}
+            />
+        </>
     )
 }
 

@@ -72,7 +72,9 @@ const Card = (props) => {
                     }
                     <Text fontWeight="400">
                         {props.content}
+                        {props.content.length >= 150 && props.type == "post" ? " ..." : null}
                     </Text>
+                    <Text bold>{props.content.length >= 150 && props.type == "post" ? "Tap to Continue Reading" : null}</Text>
                     <HStack
                         alignItems="center"
                         space={4}

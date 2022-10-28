@@ -9,7 +9,7 @@ export default function HomeStackNavigator() {
     return (
         <Stack.Navigator >
             <Stack.Screen name="HomeMain" component={HomeTabNavigator} options={{
-                title: 'Feed',
+                title: 'Home',
             }} />
             <Stack.Screen name="Post" component={PostView} options={{
                 headerBackTitle: "Cancel"

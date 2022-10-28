@@ -8,7 +8,7 @@ const GetUserMainFeed = async function () {
     var posts = [];
 
     // query the first set of documents
-    const first = query(collection(db, "posts"), orderBy("createdDate", "desc"), where("uid", "==", auth.currentUser.uid ) ,limit(25));
+    const first = query(collection(db, "posts"), orderBy("dateCreated", "desc"), where("uid", "==", auth.currentUser.uid ) ,limit(25));
     const documentSnapshots = await getDocs(first);
 
     documentSnapshots.forEach((doc) => {
@@ -27,14 +27,14 @@ const GetUserMainFeed = async function () {
         posts.push({
             title: doc.data().title,
             content: doc.data().content,
-            timestamp: doc.data().createdDate.toDate().toLocaleString(),
+            timestamp: doc.data().dateCreated.toDate().toLocaleString(),
             image: doc.data().image,
             favCount: doc.data().favCount,
             commentCount: doc.data().commentCount,
             uid: doc.data().uid,
             postId: doc.id
         });
-        //DEBUG: console.log("DOC" + doc.data);
+        console.log("DOC" + doc.data);
     });
     
 

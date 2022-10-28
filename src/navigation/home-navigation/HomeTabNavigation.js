@@ -9,7 +9,9 @@ const Tab = createMaterialTopTabNavigator();
 export default function HomeTabNavigator() {
 
   return (
-    <Tab.Navigator initialRouteName="Main">
+    <Tab.Navigator initialRouteName="Main" screenOptions={({route}) => ({
+        
+    })}>
       <Tab.Screen name="New" component={HomeScreen}/>
       <Tab.Screen name="Main" component={HomeMainFeed}/>
       <Tab.Screen name="Discover" component={ExploreScreen}/>
